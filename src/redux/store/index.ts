@@ -42,7 +42,11 @@ export const store = configureStore({
   reducer: rootReducer,
 
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(homeApi.middleware, userApi.middleware),
+    getDefaultMiddleware().concat(
+      homeApi.middleware,
+      userApi.middleware,
+      cityApi.middleware
+    ),
 });
 
 export type RootState = ReturnType<typeof store.getState>;

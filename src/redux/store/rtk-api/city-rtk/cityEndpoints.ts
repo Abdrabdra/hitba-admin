@@ -1,33 +1,70 @@
-import {ICreateManagementBody, IManagementResponse} from "./city.type";
-import hobbyApi from "./cityApi";
+import {
+  ICreateArea,
+  ICreateCity,
+  ICreateManagementBody,
+  IGetCityResponse,
+  IManagementResponse,
+} from "./city.type";
+import cityApi from "./cityApi";
 
-export const cityEndpoints = hobbyApi.injectEndpoints({
+export const cityEndpoints = cityApi.injectEndpoints({
   endpoints: (builder) => ({
-    getCities: builder.query<IManagementResponse[],any>({
+    getArea: builder.query<IGetCityResponse[], any>({
       query: () => ({
-        url: `region`,
-        method:"GET"
+        url: `region/area`,
+        method: "GET",
       }),
       providesTags: ["city"],
     }),
-    createCity: builder.mutation<any,ICreateManagementBody>({
+    getCity: builder.query<IGetCityResponse[], any>({
+      query: (arg) => ({
+        url: `region/city/${arg}`,
+        method: "GET",
+      }),
+      providesTags: ["city"],
+    }),
+
+    createArea: builder.mutation<any, ICreateArea>({
       query: (data) => ({
-        url: `region`,
-        method:"POST",
-        body:data
+        url: `region/area`,
+        method: "POST",
+        body: data,
       }),
       invalidatesTags: ["city"],
     }),
-    // deleteCity: builder.mutation<any,number>({
-    //   query: (id) => ({
-    //     url: `hobby/remove-city/${id}`,
-    //     method:"DELETE",
-    //
-    //   }),
-    //   invalidatesTags: ["city"],
-    // })
+    createCity: builder.mutation<any, ICreateCity>({
+      query: (data) => ({
+        url: `region`,
+        method: "POST",
+        body: data,
+      }),
+      invalidatesTags: ["city"],
+    }),
 
+    deleteArea: builder.mutation<any, any>({
+      query: (id) => ({
+        url: `region/area/${id.id}`,
+        method: "DELETE",
+      }),
+      invalidatesTags: ["city"],
+    }),
+    deleteCity: builder.mutation<any, any>({
+      query: (id) => ({
+        url: `region/city/${id.id}`,
+        method: "DELETE",
+      }),
+      invalidatesTags: ["city"],
+    }),
   }),
 });
 
-export const {useCreateCityMutation,useGetCitiesQuery} = cityEndpoints;
+export const {
+  useGetAreaQuery,
+  useGetCityQuery,
+
+  useCreateAreaMutation,
+  useCreateCityMutation,
+
+  useDeleteAreaMutation,
+  useDeleteCityMutation,
+} = cityEndpoints;
