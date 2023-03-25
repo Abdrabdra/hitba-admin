@@ -6,8 +6,11 @@ export const DEV_API = "http://146.190.53.201/";
 
 // export const PROD_API = "https://";
 
+// axios.defaults.withCredentials = true
+
 export const $api = axios.create({
   baseURL: DEV_API,
+  // withCredentials: true,
 });
 
 $api.interceptors.request.use((config) => {

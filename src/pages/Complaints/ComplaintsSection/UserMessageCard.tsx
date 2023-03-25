@@ -29,7 +29,6 @@ const UserMessageCard = React.memo(() => {
 
 
     const complaintData = useTypedSelector(state => state.complaint)
-    // debugger
 
     const rows = [
         {

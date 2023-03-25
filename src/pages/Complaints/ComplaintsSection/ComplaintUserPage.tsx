@@ -36,8 +36,6 @@ const ComplaintUserPage = () => {
     const [changeComplaint,{isLoading:isLoading2,isSuccess:isSuccess2, isError:isError2}] = useChangeComplaintStatusMutation()
 
     const goToBack = ()=>{
-     //   debugger
-       // debugger
 
         if (userData.isBlocked){
             changeComplaint({id:userData.complaintId,status:"COMPLETED"})

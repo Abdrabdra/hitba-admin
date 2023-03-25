@@ -61,7 +61,6 @@ const complaintStatus = {
 const ComplainedDataPart: React.FC<PropsType> = ({complaint, activeValue}) => {
 
 
-//debugger
 //     const {data: userData, isLoading, isError} = useGetOneProfileQuery(String(complaint?.culprit?.id ))
     return (
         <>
@@ -90,13 +89,11 @@ type PropsType2 = {
 
 const ComplaintListPart: React.FC<PropsType2> = ({complaint}) => {
 
-    //debugger
     const navigate = useNavigate()
     const dispatch = useDispatch()
 
 
     const handleSetUserData = (data: IComplaint) => {
-        debugger
         if (data && data.culprit) {
             dispatch(setComplainedUserData(data))
         }

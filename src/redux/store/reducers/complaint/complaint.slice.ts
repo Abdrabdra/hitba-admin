@@ -106,7 +106,6 @@ const complaintSlice = createSlice({
 
         },
         setAdditionalUserData: (state, {payload}) => {
-            //  debugger
             if (payload.phone) {
                 state.phone = payload.phone
             }

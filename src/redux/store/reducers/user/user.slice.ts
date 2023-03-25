@@ -14,7 +14,6 @@ const userSlice = createSlice({
     initialState,
     reducers: {
         setRole: (state, {payload}) => {
-            //debugger
             state.role = payload
         }
     }

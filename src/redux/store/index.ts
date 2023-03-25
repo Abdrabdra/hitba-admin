@@ -1,3 +1,15 @@
+import {
+  persistStore,
+  persistReducer,
+  FLUSH,
+  REHYDRATE,
+  PAUSE,
+  PERSIST,
+  PURGE,
+  REGISTER,
+} from "redux-persist";
+import storage from "redux-persist/lib/storage";
+
 //library
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import { TypedUseSelectorHook, useSelector } from "react-redux";
@@ -20,8 +32,19 @@ import hobbyApi from "./rtk-api/hobby-rtk/hobbyApi";
 import cityApi from "./rtk-api/city-rtk/cityApi";
 import hadithApi from "./rtk-api/hadis-rtk/hadithApi";
 
+const persistConfig = {
+  key: "root",
+  storage,
+  whitelist: ["auth"],
+};
+
+const AuthPersistConfig = {
+  key: "auth",
+  storage: storage,
+};
+
 const rootReducer = combineReducers({
-  auth: authReducer,
+  auth: persistReducer(AuthPersistConfig, authReducer),
   [homeApi.reducerPath]: homeApi.reducer,
   [userApi.reducerPath]: userApi.reducer,
   [staffApi.reducerPath]: staffApi.reducer,
@@ -38,17 +61,20 @@ const rootReducer = combineReducers({
   profile,
 });
 
+const persistedReducer = persistReducer(persistConfig, rootReducer);
+
 export const store = configureStore({
-  reducer: rootReducer,
+  reducer: persistedReducer,
 
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(
-      homeApi.middleware,
-      userApi.middleware,
-      cityApi.middleware
-    ),
+    getDefaultMiddleware({
+      serializableCheck: {
+        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+      },
+    }).concat(homeApi.middleware, userApi.middleware, cityApi.middleware),
 });
 
+export const persistor = persistStore(store);
 export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;
 export const useTypedSelector: TypedUseSelectorHook<RootState> = useSelector;

@@ -18,7 +18,6 @@ const authReducer = createSlice({
   name: "auth",
   reducers: {
     setStatus: (state, { payload }) => {
-      //debugger
       state.status = payload;
     },
   },
@@ -36,7 +35,6 @@ const authReducer = createSlice({
         state.status = ActionsEnum.ERROR;
         state.error = response.payload.message;
         console.log(response.payload.message);
-        // debugger
       })
       .addCase(logout.fulfilled, () => {
         return initialState;
@@ -50,7 +48,7 @@ const authReducer = createSlice({
       })
       .addCase(refresh.rejected, (state, { payload }) => {
         state.status = ActionsEnum.ERROR;
-        state.isAuth = false;
+        // state.isAuth = false;
       });
   },
 });

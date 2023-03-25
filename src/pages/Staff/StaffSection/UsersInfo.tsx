@@ -37,7 +37,6 @@ const UsersInfo = () => {
     const [isWindowOpen, setWindowOpen] = useState(false)
     const {id: workerId, position, iin} = useTypedSelector(state => state.staff)
     const {data: oneWorkerData, isLoading, isError, isSuccess, refetch} = useGetOneStaffQuery(workerId as number)
-    // debugger
     const [blockWorker, {
         isLoading: blockLoading,
         isError: blockError,

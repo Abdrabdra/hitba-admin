@@ -21,7 +21,6 @@ import { setRole } from "../../redux/store/reducers/user/user.slice";
 import Management from "../Management";
 
 const Main = () => {
-  // debugger
   const {data:role,isLoading,isError, refetch} = useGetRoleQuery("")
   const dispatch = useDispatch()
 

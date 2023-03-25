@@ -15,8 +15,6 @@ import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 const HadithList = () => {
     const navigate = useNavigate()
     const {hadithId} = useParams()
-    debugger
-    debugger
     const {
         data: hadithes,
         isLoading: isLoading,

@@ -76,7 +76,6 @@ const ComplainedData: React.FC<Props> = React.memo(({searchedName, activeValue})
     useEffect(() => {
         refetch()
     }, [])
-    //debugger
 
 
     return (

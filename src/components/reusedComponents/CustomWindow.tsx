@@ -28,7 +28,6 @@ const CustomWindow:React.FC<PropsType> = ({isWindowOpen,isLoading,isError,isSucc
     let data = {}
 
     if (complaintStatus&&complaintId&&changeComplaint){
-        //debugger
         data = {
             id:complaintId,
             status:complaintStatus
@@ -37,9 +36,7 @@ const CustomWindow:React.FC<PropsType> = ({isWindowOpen,isLoading,isError,isSucc
     const dispatch = useDispatch()
 
     useEffect(()=>{
-       // debugger
         if (isSuccess&&blockUser&&blockUserId&&changeComplaint){
-           // debugger
             data = {
                 id:complaintId,
                 status:"COMPLETED"
