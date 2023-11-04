@@ -3,6 +3,12 @@ import { FC, useEffect, useState } from "react";
 import { Doughnut } from "react-chartjs-2";
 import { COLORS_ORDER } from "../../../constants";
 import { IHomePart } from "../../../pages/Home/HomeSection/HomeSection.types";
+import type { ChartData, ChartOptions } from "chart.js";
+
+interface DoughnutProps {
+  options: ChartOptions<"doughnut">;
+  data: ChartData<"doughnut">;
+}
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
@@ -31,24 +37,17 @@ const DoughnutChart: FC<Props> = ({ count, barData }) => {
       }),
       datasets: [
         {
-          //@ts-ignore
           label: "Doughnut",
-          //@ts-ignore
           data: barData.map((row) => {
             return row.count;
           }),
-          //@ts-ignore
           backgroundColor: barData.map((row) => {
             handleColor();
             return COLORS_ORDER[color];
           }),
-          //@ts-ignore
           borderWidth: 1.5,
-          //@ts-ignore
           borderRadius: 8.3,
-          //@ts-ignore
           cutout: "80%",
-          //@ts-ignore
         },
       ],
     });
@@ -62,9 +61,7 @@ const DoughnutChart: FC<Props> = ({ count, barData }) => {
           position: "right",
           padding: 5,
           labels: {
-            //@ts-ignore
             boxWidth: 20,
-            //@ts-ignore
             boxHeight: 20,
             padding: 10,
           },

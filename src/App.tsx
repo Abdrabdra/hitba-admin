@@ -13,13 +13,15 @@ import React from "react";
 import { refresh } from "./redux/store/reducers/auth/auth.action";
 import { MainContext } from "./context";
 import { defaultState } from "./context/MainContext";
+import { checkAuth } from "./checkAuth";
 
 function App() {
   const { isAuth } = useTypedSelector((state) => state.auth);
 
   React.useEffect(() => {
     if (localStorage.getItem("access_token")) {
-      store.dispatch(refresh());
+      // store.dispatch(refresh());
+      checkAuth()
     }
   }, []);
 
